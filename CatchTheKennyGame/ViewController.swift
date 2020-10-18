@@ -14,7 +14,8 @@ class ViewController: UIViewController {
     var timer = Timer()
     var counter = 0
     var kennyArray = [UIImageView]()
-    var hideTimer = Timer ()
+    var hideTimer = Timer()
+    var highScore = 0
     
     //Views
     
@@ -36,6 +37,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         scoreLabel.text = "Score: \(score)"
+        
+        //Highscore check
+        
+        let storedHighScore = UserDefaults.standard.object(forKey: "highscore")
+        
+        if storedHighScore == nil {
+            highScore = 0
+            highScoreLabel.text = "Highscore: \(highScore)"
+        }
+        
+        if let newScore = storedHighScore as? Int {
+            highScore = newScore
+            highScoreLabel.text = "Highscore: \(highScore)"
+        }
         
         //Images
         kenny1.isUserInteractionEnabled = true
@@ -107,6 +122,14 @@ class ViewController: UIViewController {
             
             for kenny in kennyArray {
                 kenny.isHidden = true
+            }
+            
+            //HighScore
+            
+            if self.score > self.highScore {
+                self.highScore = self.score
+                highScoreLabel.text = "Highscore: \(self.highScore)"
+                UserDefaults.standard.setValue(self.highScore, forKey: "highscore")
             }
             
             //Alert
