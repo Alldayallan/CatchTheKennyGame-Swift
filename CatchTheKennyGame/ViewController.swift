@@ -152,7 +152,7 @@ class ViewController: UIViewController {
             
             alert.addAction(okButton)
             alert.addAction(replayButton)
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil) //test
             
         }
         
